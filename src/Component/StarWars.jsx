@@ -1,30 +1,30 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const StarWars = () => {
-  
   const [filmData, setFilmData] = useState(null);
-  
   useEffect(() => {
     const fetchInfo = async () => {
       try {
         const response = await fetch("https://swapi.dev/api/films/");
+        // console.log(response);
         const jsonData = await response.json();
+        // console.log(jsonData);
         setFilmData(jsonData);
       } catch (error) {
         console.log("Error occurred:", error);
-      } 
       }
-      
-      fetchInfo();
+    };
+
+    fetchInfo();
   }, []);
-  
 
   return (
-      
     <div className="container">
       <header className="star_wars">
-        <svg viewBox="0 0 1347.6 227.4" fill="rgb(255, 232, 31" className="logo">
+        <svg
+          viewBox="0 0 1347.6 227.4"
+          fill="rgb(255, 232, 31)"
+          className="logo">
           <g>
             <path
               className="st2"
@@ -40,36 +40,44 @@ const StarWars = () => {
 
       <main className="content_general">
         <div className="content">
-        {filmData ? (
-          {filmData.map ((data) => 
-           <div className="sub-title1">
-            <div className="sub-content">
-            <h3 className="title1">The New Hope</h3>
-            <p className="date1">May 25, 1977</p>
+          {filmData?.results ? (
+            filmData.results.map(result => {
+              return (
+                <div className="sub-title1">
+                  <div className="sub-content">
+                    <h3 className="title1">{result.title}</h3>
+                    <p className="date1">
+                      {new Date(result.release_date).toLocaleDateString(
+                        undefined,
+                        {
+                          month: "long",
+                          day: "numeric",
+                          year: "numeric",
+                        }
+                      )}
+                    </p>
 
-            <p className="content1">
-               It is a period of civil war. Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire. During the battle, Rebel spies managed to steal secret plans to the Empire's ultimate weapon, the DEATH STAR, ...
-            </p>
+                    <p className="content1">{`${result.opening_crawl.substring(
+                      0,
+                      100
+                    )}....`}</p>
 
-            <hr className='break-line'/>
+                    <hr className="break-line" />
 
-            <footer className='link-below'>
-              <a
-                href="https://www.starwars.com/"
-                className="link1"
-                >
-                More Info
-              </a>
-            </footer>
-            </div>
-          </div>
-        ))}
-       : (
-            <p>Loading...</p>
-      
-    )
-        
-        {/* <div className="sub-title1">
+                    <footer className="link-below">
+                      <a href="https://www.starwars.com/" className="link1">
+                        More Info
+                      </a>
+                    </footer>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div className="false">Loading....</div>
+          )}
+
+          {/* <div className="sub-title1">
             <div className="sub-content">
             <h3 className="title1">The New Hope</h3>
             <p className="date1">May 25, 1977</p>
@@ -90,7 +98,7 @@ const StarWars = () => {
             </footer>
             </div>
           </div> */}
-         {/* {users.map ((user, index) => {
+          {/* {users.map ((user, index) => {
           <div className="sub-title1">
             <div className="sub-content">
             <h3 className="title1">{user.result.title}</h3>
@@ -113,7 +121,7 @@ const StarWars = () => {
             </div>
           </div>
          })}  */}
-          
+
           {/* <div>
       {user.length > 0 && (
         <ul>
@@ -236,6 +244,6 @@ const StarWars = () => {
       </main>
     </div>
   );
-}
+};
 
 export default StarWars;

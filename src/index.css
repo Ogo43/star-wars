@@ -31,10 +31,10 @@ body {
 
 .content {
   display: grid;
-  grid-template-columns: auto auto auto ;
+  grid-template-columns: auto auto auto;
   /* gap: 10px; */
   padding: 0 6.5rem;
-  
+
   /* border: 2px solid red; */
 }
 
@@ -50,7 +50,6 @@ body {
   border-radius: 5px;
   box-shadow: rgb(98, 98, 198);
 }
-
 
 .sub-title2 {
   /* border: 2px solid white; */
@@ -119,7 +118,7 @@ body {
   transform: perspective(1px) translateZ(0px);
   transition: all 0.3s ease 0s;
   overflow: hidden;
-  height: 330px; 
+  height: 330px;
   padding: 0 1rem;
   border-radius: 5px;
 }
@@ -162,4 +161,9 @@ body {
   color: rgb(255, 232, 31);
   cursor: pointer;
   pointer-events: none;
+}
+
+.yeah,
+.false {
+  color: white;
 }

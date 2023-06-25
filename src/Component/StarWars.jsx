@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const StarWars = () => {
   const [filmData, setFilmData] = useState(null);
@@ -43,7 +44,7 @@ const StarWars = () => {
           {filmData?.results ? (
             filmData.results.map(result => {
               return (
-                <div className="sub-title1">
+                <div className="sub-title1" key={result.episode_id}>
                   <div className="sub-content">
                     <h3 className="title1">{result.title}</h3>
                     <p className="date1">
@@ -64,11 +65,11 @@ const StarWars = () => {
 
                     <hr className="break-line" />
 
-                    <footer className="link-below">
-                      <a href="https://www.starwars.com/" className="link1">
-                        More Info
-                      </a>
-                    </footer>
+                    <Link
+                      to={`/movie/${result.url.split("films/")[1]}`}
+                      className="link1">
+                      <button className="link-below">More Info</button>
+                    </Link>
                   </div>
                 </div>
               );
